@@ -1,5 +1,4 @@
-text eol=lf
-
+* text=auto
 *.cs text
 *.shader text
 *.asset text
@@ -7,3 +6,5 @@ text eol=lf
 *.txt text
 *.unity text
 *.mat text
+*.meta	text eol=lf
+*.cs	text eol=lf
