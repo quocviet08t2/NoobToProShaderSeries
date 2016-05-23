@@ -1,5 +1,5 @@
 * text=auto
-
+# Unity project files
 *.cs		text eol=lf
 *.meta		text eol=lf
 *.prefab	text eol=lf
@@ -9,5 +9,8 @@
 *.txt		text eol=lf
 *.unity		text eol=lf
 *.mat		text eol=lf
+# Config text file
 .gitattributes text eol=lf
+.editorconfig text eol=lf
+.gitignore text eol=lf
 
