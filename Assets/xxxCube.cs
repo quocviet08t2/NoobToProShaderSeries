@@ -8,10 +8,12 @@ public class xxxCube : MonoBehaviour {
 
         float xxx = 2;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        float y = 3;
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 }
