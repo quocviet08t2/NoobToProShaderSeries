@@ -9,3 +9,5 @@
 *.txt		text eol=lf
 *.unity		text eol=lf
 *.mat		text eol=lf
+.gitattributes text eol=lf
+
