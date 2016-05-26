@@ -29,13 +29,5 @@ namespace UnitySerialized
         public ColorPoint[] points;
         public Vector3 vector;
         public Vector3[] vectors;
-
-        //public List<AudioData> customList = new List<AudioData>()
-        //{
-        //    new AudioData("Viet"),
-        //    new AudioData("Phan"),
-        //    new AudioData("Kaka")
-        //};
-        public AudioData xxx = new AudioData("Daica");
     }
 }

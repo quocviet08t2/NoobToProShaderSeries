@@ -21,13 +21,11 @@ namespace UnitySerialized
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            //EditorList.Show(serializedObject.FindProperty("customList"), EditorListOption.ListLabel | EditorListOption.ElementLabels);
-            //EditorGUILayout.PropertyField(serializedObject.FindProperty("customList"), true);
             EditorList.Show(serializedObject.FindProperty("integers"), EditorListOption.NoElementLabels);
             EditorList.Show(serializedObject.FindProperty("vectors"));
-            EditorList.Show(serializedObject.FindProperty("colorPoints"), EditorListOption.None);
-            EditorList.Show(serializedObject.FindProperty("objects"), EditorListOption.ListLabel);
-            serializedObject.ApplyModifiedProperties();
+			EditorList.Show(serializedObject.FindProperty("colorPoints"), EditorListOption.Buttons);
+			EditorList.Show(serializedObject.FindProperty("objects"), EditorListOption.ListLabel | EditorListOption.Buttons);
+			serializedObject.ApplyModifiedProperties();
         }
     }
 }
