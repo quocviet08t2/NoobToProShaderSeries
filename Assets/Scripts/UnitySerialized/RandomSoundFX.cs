@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace UnitySerialized
 {
-	public enum AudioType
+	public enum AudioSourceType
 	{
 		AudioSourceEffect,
 		AudioSourceEnvironment,
@@ -12,9 +12,9 @@ namespace UnitySerialized
 	}
 
 	[System.Serializable]
-	public class AudioData
+	public class RandomSoundFX
 	{
-		public AudioType Type;
+		public AudioSourceType Type;
 		public List<AudioClip> ClipColletion;
 	}
 }
