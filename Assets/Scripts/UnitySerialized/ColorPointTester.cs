@@ -11,18 +11,6 @@ namespace UnitySerialized
         public Vector3 position;
     }
 
-    [System.Serializable]
-    public class AudioData
-    {
-        public AudioData(string name)
-        {
-            Name = name;
-        }
-        [HideInInspector]
-        public string Name;
-        public AudioClip[] Value = null;
-    }
-
     public class ColorPointTester : MonoBehaviour
     {
         public ColorPoint point;
