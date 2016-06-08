@@ -1,12 +1,12 @@
-﻿Shader "CgPrograming/Cg shading in world space" {
+﻿Shader "CgPrograming/Basic/Cg shading in world space" {
 	SubShader{
 		Pass{
 		CGPROGRAM
 
-#pragma vertex vert  
-#pragma fragment frag 
+#pragma vertex vert
+#pragma fragment frag
 
-		// uniform float4x4 _Object2World; 
+		// uniform float4x4 _Object2World;
 		// automatic definition of a Unity-specific uniform parameter
 
 		struct vertexInput {
@@ -24,7 +24,7 @@
 		output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
 		output.position_in_world_space =
 			mul(_Object2World, input.vertex);
-		// transformation of input.vertex from object 
+		// transformation of input.vertex from object
 		// coordinates to world coordinates;
 		return output;
 	}
@@ -33,8 +33,8 @@
 	{
 		float dist = distance(input.position_in_world_space,
 		float4(0.0, 0.0, 0.0, 1.0));
-	// computes the distance between the fragment position 
-	// and the origin (the 4th coordinate should always be 
+	// computes the distance between the fragment position
+	// and the origin (the 4th coordinate should always be
 	// 1 for points).
 
 	if (dist < 1)

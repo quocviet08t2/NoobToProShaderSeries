@@ -1,33 +1,33 @@
-﻿///Let's first focus on the discard instruction in the fragment shader. This 
-//instruction basically just discards the processed fragment. (This was called 
-//a fragment “kill” in earlier shading languages; I can understand that the 
+﻿///Let's first focus on the discard instruction in the fragment shader. This
+//instruction basically just discards the processed fragment. (This was called
+//a fragment “kill” in earlier shading languages; I can understand that the
 //fragments prefer the term “discard”.) Depending on the hardware, this can be a
-//quite expensive technique in the sense that rendering might perform considerably 
-//worse as soon as there is one shader that includes a discard instruction 
+//quite expensive technique in the sense that rendering might perform considerably
+//worse as soon as there is one shader that includes a discard instruction
 //(regardless of how many fragments are actually discarded, just the presence of
-//the instruction may result in the deactivation of some important 
+//the instruction may result in the deactivation of some important
 //optimizations). Therefore, you should avoid this instruction whenever possible
 //but in particular when you run into performance problems.
-Shader "CgPrograming/Cutaways" 
+Shader "CgPrograming/Transparent Surfaces/Cutaways"
 {
 	SubShader
 	{
 		Pass
 		{
 			Cull Off // turn off triangle culling, alternatives are:
-				 // Cull Back (or nothing): cull only back faces 
+				 // Cull Back (or nothing): cull only back faces
 				 // Cull Front : cull only front faces
 			CGPROGRAM
 
-#pragma vertex vert  
-#pragma fragment frag 
+#pragma vertex vert
+#pragma fragment frag
 
-			struct vertexInput 
+			struct vertexInput
 			{
 				float4 vertex : POSITION;
 			};
 
-			struct vertexOutput 
+			struct vertexOutput
 			{
 				float4 pos : SV_POSITION;
 				float4 posInObjectCoords : TEXCOORD0;

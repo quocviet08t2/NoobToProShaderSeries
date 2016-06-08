@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Cutaways
-  m_Shader: {fileID: 4800000, guid: 38ac4f89d6ff7474a85819620ad24920, type: 3}
+  m_Name: 2.Transparency
+  m_Shader: {fileID: 4800000, guid: 8cf855952bf8ef64fabfe32c4683ac5c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
