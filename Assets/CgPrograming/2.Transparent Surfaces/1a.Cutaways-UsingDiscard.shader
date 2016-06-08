@@ -8,7 +8,7 @@
 //the instruction may result in the deactivation of some important
 //optimizations). Therefore, you should avoid this instruction whenever possible
 //but in particular when you run into performance problems.
-Shader "CgPrograming/Transparent Surfaces/Cutaways"
+Shader "CgPrograming/Transparent Surfaces/Cg shader using discard"
 {
 	SubShader
 	{
