@@ -1,4 +1,7 @@
-﻿Shader "NoodToProUnityShader/2_Lambert"
+﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "NoodToProUnityShader/2_Lambert"
 {
 	Properties
 	{
@@ -46,7 +49,7 @@
 			{
 				vertexOutput o;
 
-				float3 normalDirection = normalize(mul(float4(v.normal, 0.0), _World2Object).xyz);
+				float3 normalDirection = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject).xyz);
 				float3 lightDirection;
 				float aten = 1.0;
 
@@ -54,7 +57,7 @@
 				float3 diffuseReflection = aten * _LightColor0.xyz * _Color.rgb * max(0, dot(normalDirection, lightDirection));
 
 				o.col = float4(diffuseReflection, 1.0);
-				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.pos = UnityObjectToClipPos(v.vertex);
 				return o;
 			}
 

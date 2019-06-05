@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 // Additive blending, the code for DstFactor has to be one and the code
 // for SrcFactor must not depend on the pixel color in the framebuffer
 //	- One
@@ -25,7 +27,7 @@ Shader "CgPrograming/3.Order-Independent Transparent/1.AdditiveBlending"
 
 			float4 vert(float4 vertexPos : POSITION) : SV_POSITION
 			{
-				return mul(UNITY_MATRIX_MVP, vertexPos);
+				return UnityObjectToClipPos(vertexPos);
 			}
 
 			float4 frag(void) : COLOR

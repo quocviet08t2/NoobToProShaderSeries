@@ -1,4 +1,6 @@
-﻿// About blending
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// About blending
 Shader "CgPrograming/Transparent Surfaces/2.Transparency"
 {
 	SubShader
@@ -31,7 +33,7 @@ Shader "CgPrograming/Transparent Surfaces/2.Transparency"
 			{
 				vertexOutput output;
 
-				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
+				output.pos = UnityObjectToClipPos(input.vertex);
 
 				return output;
 			}
@@ -71,7 +73,7 @@ Shader "CgPrograming/Transparent Surfaces/2.Transparency"
 			{
 				vertexOutput output;
 
-				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
+				output.pos = UnityObjectToClipPos(input.vertex);
 
 				return output;
 			}

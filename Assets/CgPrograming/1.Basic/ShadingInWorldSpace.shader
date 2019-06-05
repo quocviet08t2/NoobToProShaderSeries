@@ -1,4 +1,7 @@
-﻿Shader "CgPrograming/Basic/Cg shading in world space" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "CgPrograming/Basic/Cg shading in world space" {
 	SubShader{
 		Pass{
 		CGPROGRAM
@@ -21,9 +24,9 @@
 	{
 		vertexOutput output;
 
-		output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
+		output.pos = UnityObjectToClipPos(input.vertex);
 		output.position_in_world_space =
-			mul(_Object2World, input.vertex);
+			mul(unity_ObjectToWorld, input.vertex);
 		// transformation of input.vertex from object
 		// coordinates to world coordinates;
 		return output;

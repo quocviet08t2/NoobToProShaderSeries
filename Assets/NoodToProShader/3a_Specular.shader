@@ -1,4 +1,7 @@
-﻿Shader "NoodToProUnityShader/3a_Specular"
+﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "NoodToProUnityShader/3a_Specular"
 {
 	Properties
 	{
@@ -44,11 +47,11 @@
 			{
 				vertexOutput o;
 
-				float3 normalDirection = normalize(_World2Object[0].xyz * v.normal.x +
-					_World2Object[1].xyz * v.normal.y +
-					_World2Object[2].xyz * v.normal.z);
+				float3 normalDirection = normalize(unity_WorldToObject[0].xyz * v.normal.x +
+					unity_WorldToObject[1].xyz * v.normal.y +
+					unity_WorldToObject[2].xyz * v.normal.z);
 
-				float3 viewDirection = normalize(_WorldSpaceCameraPos - mul(UNITY_MATRIX_MVP, v.vertex));
+				float3 viewDirection = normalize(_WorldSpaceCameraPos - UnityObjectToClipPos(v.vertex));
 				float aten = 1.0;
 
 				float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);			
@@ -58,7 +61,7 @@
 				float3 lightFinal = diffuseReflection + specularDirection + UNITY_LIGHTMODEL_AMBIENT;
 
 				o.col = float4(lightFinal * _Color, 1.0);
-				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.pos = UnityObjectToClipPos(v.vertex);
 				return o;
 			}
 

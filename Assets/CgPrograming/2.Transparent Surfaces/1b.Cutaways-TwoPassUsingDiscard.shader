@@ -1,4 +1,7 @@
-﻿Shader "CgPrograming/Transparent Surfaces/Cg shader with two passes using discard"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "CgPrograming/Transparent Surfaces/Cg shader with two passes using discard"
 {
 	SubShader
 	{
@@ -27,8 +30,8 @@
 			{
 				vertexOutput output;
 
-				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
-				output.posInObjectCoords = mul(_Object2World, input.vertex);
+				output.pos = UnityObjectToClipPos(input.vertex);
+				output.posInObjectCoords = mul(unity_ObjectToWorld, input.vertex);
 
 				return output;
 			}
@@ -71,8 +74,8 @@
 			{
 				vertexOutput output;
 
-				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
-				output.posInObjectCoords = mul(_Object2World, input.vertex);
+				output.pos = UnityObjectToClipPos(input.vertex);
+				output.posInObjectCoords = mul(unity_ObjectToWorld, input.vertex);
 
 				return output;
 			}

@@ -1,4 +1,7 @@
-﻿///Let's first focus on the discard instruction in the fragment shader. This
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+///Let's first focus on the discard instruction in the fragment shader. This
 //instruction basically just discards the processed fragment. (This was called
 //a fragment “kill” in earlier shading languages; I can understand that the
 //fragments prefer the term “discard”.) Depending on the hardware, this can be a
@@ -37,8 +40,8 @@ Shader "CgPrograming/Transparent Surfaces/Cg shader using discard"
 			{
 				vertexOutput output;
 
-				output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
-				output.posInObjectCoords = mul(_Object2World, input.vertex);
+				output.pos = UnityObjectToClipPos(input.vertex);
+				output.posInObjectCoords = mul(unity_ObjectToWorld, input.vertex);
 
 				return output;
 			}

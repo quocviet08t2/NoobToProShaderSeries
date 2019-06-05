@@ -1,4 +1,6 @@
-﻿Shader "NoodToProUnityShader/1_FlatColor"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "NoodToProUnityShader/1_FlatColor"
 {
 	Properties
 	{
@@ -28,7 +30,7 @@
 			vertexOutput vert(vertexInput v)
 			{
 				vertexOutput o;
-				o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.pos = UnityObjectToClipPos(v.vertex);
 				return o;
 			}
 
