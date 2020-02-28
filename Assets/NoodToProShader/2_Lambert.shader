@@ -3,74 +3,73 @@
 
 Shader "NoodToProUnityShader/2_Lambert"
 {
-	Properties
-	{
-		_Color("Color", Color) = (1.0, 1.0, 1.0, 1.0)
-	}
+    Properties
+    {
+        _Color ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
+    }
 
-	SubShader
-	{
-		pass
-		{
-			Tags
-			{
-				"LightMode" = "ForwardBase"
-			}
+    SubShader
+    {
+        pass
+        {
+            Tags { "LightMode" = "ForwardBase" }
 
-			CGPROGRAM
-#pragma vertex vert
-#pragma fragment frag
-			
-			// User defined variables
-			uniform fixed4 _Color;
+            CGPROGRAM
 
-			// Unity defined variables
-			uniform float4 _LightColor0;
-			// float4x4 _Object2World;
-			// float4x4 _World2Object;
-			// float4x4 _WorldLightPos0;
+            #pragma vertex vert
+            #pragma fragment frag
 
-			// Base input struct
-			struct vertexInput
-			{
-				float4 vertex : POSITION;
-				float3 normal : NORMAL;
-			};
+            // User defined variables
+            uniform fixed4 _Color;
 
-			// base output struct
-			struct vertexOutput
-			{
-				float4 pos : SV_POSITION;
-				float4 col : COLOR;
-			};
+            // Unity defined variables
+            uniform float4 _LightColor0;
+            // float4x4 _Object2World;
+            // float4x4 _World2Object;
+            // float4x4 _WorldLightPos0;
 
-			// vertex function
-			vertexOutput vert(vertexInput v)
-			{
-				vertexOutput o;
+            // Base input struct
+            struct vertexInput
+            {
+                float4 vertex: POSITION;
+                float3 normal: NORMAL;
+            };
 
-				float3 normalDirection = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject).xyz);
-				float3 lightDirection;
-				float aten = 1.0;
+            // base output struct
+            struct vertexOutput
+            {
+                float4 pos: SV_POSITION;
+                float4 col: COLOR;
+            };
 
-				lightDirection = normalize(_WorldSpaceLightPos0.xyz);
-				float3 diffuseReflection = aten * _LightColor0.xyz * _Color.rgb * max(0, dot(normalDirection, lightDirection));
+            // vertex function
+            vertexOutput vert(vertexInput v)
+            {
+                vertexOutput o;
 
-				o.col = float4(diffuseReflection, 1.0);
-				o.pos = UnityObjectToClipPos(v.vertex);
-				return o;
-			}
+                float3 normalDirection = normalize(mul(float4(v.normal, 0.0), unity_WorldToObject).xyz);
+                float3 lightDirection;
+                float aten = 1.0;
 
-			// fragment function
-			fixed4 frag(vertexOutput i) : COLOR
-			{
-				fixed4 result;
-				result = i.col;
-				return result;
-			}
+                lightDirection = normalize(_WorldSpaceLightPos0.xyz);
+                float3 diffuseReflection = aten * _LightColor0.xyz * _Color.rgb * max(0, dot(normalDirection, lightDirection));
 
-			ENDCG
-		}
-	}
-	Fallback "Diffuse"
+                o.col = float4(diffuseReflection, 1.0);
+                o.pos = UnityObjectToClipPos(v.vertex);
+                return o;
+            }
+
+            // fragment function
+            fixed4 frag(vertexOutput i): COLOR
+            {
+                fixed4 result;
+                result = i.col;
+                return result;
+            }
+
+            ENDCG
+
+        }
+    }
+    Fallback "Diffuse"
 }

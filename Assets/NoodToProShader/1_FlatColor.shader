@@ -2,47 +2,49 @@
 
 Shader "NoodToProUnityShader/1_FlatColor"
 {
-	Properties
-	{
-		_Color("Color", Color) = (1.0, 1.0, 1.0, 1.0)
-	}
+    Properties
+    {
+        _Color ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
+    }
 
-	SubShader
-	{
-		pass
-		{
-			CGPROGRAM
-#pragma vertex vert
-#pragma fragment frag
+    SubShader
+    {
+        pass
+        {
+            CGPROGRAM
 
-			uniform fixed4 _Color;
-			
-			struct vertexInput
-			{
-				float4 vertex : POSITION;
-			};
+            #pragma vertex vert
+            #pragma fragment frag
 
-			struct vertexOutput
-			{
-				float4 pos : SV_POSITION;
-			};
+            uniform fixed4 _Color;
 
-			vertexOutput vert(vertexInput v)
-			{
-				vertexOutput o;
-				o.pos = UnityObjectToClipPos(v.vertex);
-				return o;
-			}
+            struct vertexInput
+            {
+                float4 vertex: POSITION;
+            };
 
-			fixed4 frag(vertexOutput i) : COLOR
-			{
-				fixed4 result;
-				result = _Color;
-				return result;
-			}
+            struct vertexOutput
+            {
+                float4 pos: SV_POSITION;
+            };
 
-			ENDCG
-		}
-	}
-	Fallback "Diffuse"
+            vertexOutput vert(vertexInput v)
+            {
+                vertexOutput o;
+                o.pos = UnityObjectToClipPos(v.vertex);
+                return o;
+            }
+
+            fixed4 frag(vertexOutput i): COLOR
+            {
+                fixed4 result;
+                result = _Color;
+                return result;
+            }
+
+            ENDCG
+
+        }
+    }
+    Fallback "Diffuse"
 }

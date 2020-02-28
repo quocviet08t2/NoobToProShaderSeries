@@ -3,74 +3,73 @@
 
 Shader "NoodToProUnityShader/3a_Specular"
 {
-	Properties
-	{
-		_Color("Color", Color) = (1.0, 1.0, 1.0, 1.0)
-		_SpecColor("Specular Color", Color) = (1.0, 1.0, 1.0, 1.0)
-		_Shininess("Shininess", float) = 10
-	}
+    Properties
+    {
+        _Color ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
+        _SpecColor ("Specular Color", Color) = (1.0, 1.0, 1.0, 1.0)
+        _Shininess ("Shininess", float) = 10
+    }
 
-	SubShader
-	{
-		Tags
-		{
-			"LightMode" = "ForwardBase"
-		}
+    SubShader
+    {
+        Tags { "LightMode" = "ForwardBase" }
 
-		Pass
-		{
-			CGPROGRAM
-#pragma vertex vert
-#pragma fragment frag
+        Pass
+        {
+            CGPROGRAM
 
-			//user defined variables
-			uniform float4 _Color;
-			uniform float4 _SpecColor;
-			uniform float _Shininess;
+            #pragma vertex vert
+            #pragma fragment frag
 
-			//unity defined variables
-			uniform float4 _LightColor0;
+            //user defined variables
+            uniform float4 _Color;
+            uniform float4 _SpecColor;
+            uniform float _Shininess;
 
-			struct vertexInput
-			{
-				float4 vertex : POSITION;
-				float3 normal : NORMAL;
-			};
+            //unity defined variables
+            uniform float4 _LightColor0;
 
-			struct vertexOutput
-			{
-				float4 pos : SV_POSITION;
-				float4 col : COLOR;
-			};
+            struct vertexInput
+            {
+                float4 vertex: POSITION;
+                float3 normal: NORMAL;
+            };
 
-			vertexOutput vert(vertexInput v)
-			{
-				vertexOutput o;
+            struct vertexOutput
+            {
+                float4 pos: SV_POSITION;
+                float4 col: COLOR;
+            };
 
-				float3 normalDirection = normalize(unity_WorldToObject[0].xyz * v.normal.x +
-					unity_WorldToObject[1].xyz * v.normal.y +
-					unity_WorldToObject[2].xyz * v.normal.z);
+            vertexOutput vert(vertexInput v)
+            {
+                vertexOutput o;
 
-				float3 viewDirection = normalize(_WorldSpaceCameraPos - UnityObjectToClipPos(v.vertex));
-				float aten = 1.0;
+                float3 normalDirection = normalize(unity_WorldToObject[0].xyz * v.normal.x +
+                unity_WorldToObject[1].xyz * v.normal.y +
+                unity_WorldToObject[2].xyz * v.normal.z);
 
-				float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);			
-				float3 diffuseReflection = aten * _LightColor0.xyz * max(0.0, dot(normalDirection, lightDirection));
+                float3 viewDirection = normalize(_WorldSpaceCameraPos - UnityObjectToClipPos(v.vertex));
+                float aten = 1.0;
 
-				float3 specularDirection = aten * _SpecColor * max(0.0, dot(normalDirection, lightDirection)) * pow(max(0.0, dot(reflect(-lightDirection, normalDirection), viewDirection)), _Shininess);
-				float3 lightFinal = diffuseReflection + specularDirection + UNITY_LIGHTMODEL_AMBIENT;
+                float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
+                float3 diffuseReflection = aten * _LightColor0.xyz * max(0.0, dot(normalDirection, lightDirection));
 
-				o.col = float4(lightFinal * _Color, 1.0);
-				o.pos = UnityObjectToClipPos(v.vertex);
-				return o;
-			}
+                float3 specularDirection = aten * _SpecColor * max(0.0, dot(normalDirection, lightDirection)) * pow(max(0.0, dot(reflect(-lightDirection, normalDirection), viewDirection)), _Shininess);
+                float3 lightFinal = diffuseReflection + specularDirection + UNITY_LIGHTMODEL_AMBIENT;
 
-			float4 frag(vertexOutput i) : COLOR
-			{
-				return i.col;
-			}
-			ENDCG
-		}
-	}
-	//Fallback "Diffuse"
+                o.col = float4(lightFinal * _Color, 1.0);
+                o.pos = UnityObjectToClipPos(v.vertex);
+                return o;
+            }
+
+            float4 frag(vertexOutput i): COLOR
+            {
+                return i.col;
+            }
+            ENDCG
+
+        }
+    }
+    //Fallback "Diffuse"
 }

@@ -3,88 +3,90 @@
 // About blending
 Shader "CgPrograming/Transparent Surfaces/2.Transparency"
 {
-	SubShader
-	{
-		Tags { "Queue" = "Transparent"}
+    SubShader
+    {
+        Tags { "Queue" = "Transparent" }
 
-		Pass
-		{
-			Cull Front
+        Pass
+        {
+            Cull Front
 
-			ZWrite Off
-			Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
+            Blend SrcAlpha OneMinusSrcAlpha
 
-			CGPROGRAM
+            CGPROGRAM
 
-#pragma vertex vert
-#pragma fragment frag
+            #pragma vertex vert
+            #pragma fragment frag
 
-			struct vertexInput
-			{
-				float4 vertex : POSITION;
-			};
+            struct vertexInput
+            {
+                float4 vertex: POSITION;
+            };
 
-			struct vertexOutput
-			{
-				float4 pos : SV_POSITION;
-			};
+            struct vertexOutput
+            {
+                float4 pos: SV_POSITION;
+            };
 
-			vertexOutput vert(vertexInput input)
-			{
-				vertexOutput output;
+            vertexOutput vert(vertexInput input)
+            {
+                vertexOutput output;
 
-				output.pos = UnityObjectToClipPos(input.vertex);
+                output.pos = UnityObjectToClipPos(input.vertex);
 
-				return output;
-			}
+                return output;
+            }
 
-			float4 frag(vertexOutput input) : COLOR
-			{
+            float4 frag(vertexOutput input): COLOR
+            {
 
-				return float4(0.0, 1.0, 0.0, 0.3); // green
-			}
+                return float4(0.0, 1.0, 0.0, 0.3); // green
+            }
 
-			ENDCG
-		}
+            ENDCG
 
-		Pass
-			{
-				Cull Back
+        }
 
-				ZWrite Off
-				Blend SrcAlpha OneMinusSrcAlpha
+        Pass
+        {
+            Cull Back
 
-				CGPROGRAM
+            ZWrite Off
+            Blend SrcAlpha OneMinusSrcAlpha
 
-#pragma vertex vert
-#pragma fragment frag
+            CGPROGRAM
 
-			struct vertexInput
-			{
-				float4 vertex : POSITION;
-			};
+            #pragma vertex vert
+            #pragma fragment frag
 
-			struct vertexOutput
-			{
-				float4 pos : SV_POSITION;
-			};
+            struct vertexInput
+            {
+                float4 vertex: POSITION;
+            };
 
-			vertexOutput vert(vertexInput input)
-			{
-				vertexOutput output;
+            struct vertexOutput
+            {
+                float4 pos: SV_POSITION;
+            };
 
-				output.pos = UnityObjectToClipPos(input.vertex);
+            vertexOutput vert(vertexInput input)
+            {
+                vertexOutput output;
 
-				return output;
-			}
+                output.pos = UnityObjectToClipPos(input.vertex);
 
-			float4 frag(vertexOutput input) : COLOR
-			{
+                return output;
+            }
 
-				return float4(1.0, 0.0, 0.0, 0.3);
-			}
+            float4 frag(vertexOutput input): COLOR
+            {
 
-				ENDCG
-			}
-	}
+                return float4(1.0, 0.0, 0.0, 0.3);
+            }
+
+            ENDCG
+
+        }
+    }
 }
